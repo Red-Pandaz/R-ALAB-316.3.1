@@ -43,3 +43,14 @@ for(let menuLink of menuLinks){
     // Append the new element to the topMenuEl element.
     topMenuEl.append(newLink);
 };
+
+// Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+let subMenuEl = document.querySelector('#sub-menu')
+// Set the height subMenuEl element to be "100%".
+subMenuEl.style.height = '100%'
+// Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
+topMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
+// Add the class of flex-around to the subMenuEl element.
+subMenuEl.classList.add('flex-around')
+
+
