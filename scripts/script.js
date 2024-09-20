@@ -111,12 +111,10 @@ topMenuEl.addEventListener('click', function(e){
             for(let menuLink of menuLinks){
               if(menuLink.text === e.target.textContent){
                 if(menuLink.subLinks){
-                  console.log('sublinks')
                   subMenuEl.style.top = '100%'
-                  console.log(subMenuEl.style.top)
                 } else{
-                  console.log(menuLink)
-                  console.log('nosublinks')
+                  // If the ABOUT link is clicked, an <h1>About</h1> should be displayed.
+                  mainEl.innerHTML = '<h1>About</h1>'
                   subMenuEl.style.top = '0'
                 }
 
@@ -143,7 +141,7 @@ function buildSubmenu(topLink){
   let linkMatch = menuLinks.find(link => link.text === topLink)
   if(linkMatch.subLinks){
     for(let subLink of linkMatch.subLinks){
-    // Create an <a> element.
+      // Create an <a> element.
       let subLinkElm = document.createElement('a')
       // Add an href attribute to the <a>, with the value set by the href property of the "link" object.
       subLinkElm.setAttribute('href', subLink.href)
@@ -155,3 +153,32 @@ function buildSubmenu(topLink){
   }
 return
 }
+// Attach a delegated 'click' event listener to subMenuEl.
+subMenuEl.addEventListener('click', function(e){
+  // The first line of code of the event listener function should call the event object's preventDefault() method.
+  e.preventDefault();
+  // The second line of code within the function should immediately return if the element clicked was not an <a> element.
+  if(e.target.tagName !== 'A'){
+    return
+  } else{
+    // Log the content of the <a> to verify the handler is working.
+    console.log(e.target.textContent)
+    // Next, the event listener should set the CSS top property of subMenuEl to 0.
+    subMenuEl.style.top = '0'
+    // Remove the active class from each <a> element in topMenuLinks.
+    topMenuLinks.forEach(function(topMenuLink){
+      topMenuLink.classList.remove('active')
+
+    })
+      // Update the contents of mainEl, within an <h1>, to the contents of the <a> element clicked within subMenuEl.
+      mainEl.innerHTML = `<h1>${e.target.textContent}</h1>`
+  }
+})
+
+
+
+
+
+
+
+// If the ABOUT link is clicked, an <h1>About</h1> should be displayed.
